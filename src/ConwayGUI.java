@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ConwayGUI extends JComponent {
-    private static int boardSize = 100;
+    private static int boardSize = 1080;
     private static final int CELL_DIM = 5;
     private static final int WINDOW_SIZE = boardSize *CELL_DIM;
     private static final int FPS = 500;
