@@ -1,5 +1,7 @@
+// TODO add comments
+// TODO add file opener to allow for initial state via txt file
+
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +35,8 @@ public class ConwayGUI extends JComponent {
         //Add content to the window.
         // Gen counter
         JPanel genCounter = new JPanel();
-        genCounter.add(new JLabel("Gen: " + game.getGeneration()));
+        JLabel genLabel = new JLabel("Gen: " + game.getGeneration());
+        genCounter.add(genLabel);
         genCounter.setBackground(Color.GRAY);
         genCounter.setOpaque(true);
         genCounter.setBounds(0,0, 55,28);
@@ -53,14 +56,13 @@ public class ConwayGUI extends JComponent {
 
         frame.add(lpane, BorderLayout.CENTER);
 
-
         Timer timer = new Timer(FPS, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // update variables
                 game.step();
-                System.out.println(game.getGeneration());
-                lpane.repaint(); // Todo gen not updating
+                genLabel.setText("Gen: " + game.getGeneration());
+                lpane.repaint();
             }
         });
         timer.start();

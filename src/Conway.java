@@ -1,6 +1,7 @@
+// TODO add comments
+
 import java.util.*;
 import java.util.List;
-
 
 public class Conway {
     private int generation = 1 ;
