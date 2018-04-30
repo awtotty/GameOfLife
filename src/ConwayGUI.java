@@ -41,7 +41,7 @@ public class ConwayGUI extends JComponent {
         genCounter.add(genLabel);
         genCounter.setBackground(Color.GRAY);
         genCounter.setOpaque(true);
-        genCounter.setBounds(0,0, 55,28);
+        genCounter.setBounds(0,0, 80,28);
 
         // Grid
         JPanel grid = new JPanel();
