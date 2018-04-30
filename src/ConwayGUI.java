@@ -1,5 +1,6 @@
-// TODO add comments
 // TODO add file opener to allow for initial state via txt file
+
+// GUI class for creating and displaying Conway's Game of Life.
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,10 +10,11 @@ import java.awt.event.ActionListener;
 public class ConwayGUI extends JComponent {
     private static int boardSize = 1080;
     private static final int CELL_DIM = 5;
-    private static final int WINDOW_SIZE = boardSize *CELL_DIM;
-    private static final int FPS = 500;
+    // window dimensions are determined by the number size of the visible world and size of each cell
+    private static final int WINDOW_SIZE = boardSize * CELL_DIM;
+    private static final int FPS = 500; // update every 0.5 second
 
-    private static Conway game = new Conway(boardSize);
+    private static Conway game = new Conway(boardSize); // the game
 
     public ConwayGUI() {
         setPreferredSize(new Dimension(WINDOW_SIZE, WINDOW_SIZE));
@@ -54,6 +56,7 @@ public class ConwayGUI extends JComponent {
         lpane.add(grid, 0, 0);
         lpane.add(genCounter, 1, 0);
 
+        // Add layered pane to frame
         frame.add(lpane, BorderLayout.CENTER);
 
         Timer timer = new Timer(FPS, new ActionListener() {
@@ -62,7 +65,7 @@ public class ConwayGUI extends JComponent {
                 // update variables
                 game.step();
                 genLabel.setText("Gen: " + game.getGeneration());
-                lpane.repaint();
+                lpane.repaint(); // repaint the pane, not the entire frame
             }
         });
         timer.start();

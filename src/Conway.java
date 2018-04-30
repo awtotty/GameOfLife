@@ -1,27 +1,37 @@
-// TODO add comments
+// Model of a game of Conway's Game of Life.
 
 import java.util.*;
 import java.util.List;
 
 public class Conway {
-    private int generation = 1 ;
+    private int generation = 1 ; // track generation
+    // set initial hash size large enough to avoid resizing for a while
     private final int HASH_SIZE = (int) Math.pow(2, 14);
-    private HashSet<Cell> world = new HashSet<>(HASH_SIZE);
+    private HashSet<Cell> world = new HashSet<>(HASH_SIZE); // track living cells
+    // track number of living neighbors (cells not in the hashmap are assumed to have no living neighbors
     private HashMap<Cell, Integer> counts = new HashMap<>(HASH_SIZE);
 
-    // Creates a random world
+
+    /**
+     * Creates a random world
+     * @param size
+     */
     public Conway(int size) {
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
                 Cell c = new Cell(x, y);
                 // randomly decide if the given cell is alive
-                if ( Math.random() > 0.9 ) {
+                if ( Math.random() > 0.9 ) { // chance of living = 90%
                     addCell(c);
                 }
             }
         }
     }
 
+    /**
+     * Creates world from given initial state
+     * @param initState
+     */
     public Conway(List<List<Integer>> initState) {
         for (List<Integer> cell : initState) {
             Cell c = new Cell(cell.get(0), cell.get(1));
@@ -29,6 +39,11 @@ public class Conway {
         }
     }
 
+    /**
+     * Adds a given cell to the world and increments the count
+     * of living neighbors for each of the cell's neighbors.
+     * @param c
+     */
     private void addCell(Cell c){
         world.add(c);
         // inc neighbors count
@@ -42,6 +57,11 @@ public class Conway {
         }
     }
 
+    /**
+     * Removes a given cell from the world and decrements the count
+     * of living neighbors for each of the cell's neighbors.
+     * @param c
+     */
     private void removeCell(Cell c) {
         world.remove(c);
         // dec neighbors count
@@ -53,6 +73,9 @@ public class Conway {
         }
     }
 
+    /**
+     * Advance the world by one generation.
+     */
     public void step() {
         generation++;
 
@@ -81,14 +104,25 @@ public class Conway {
         }
     }
 
+    /**
+     * Getter
+     * @return generation
+     */
     public int getGeneration() {
         return generation;
     }
 
+    /**
+     * Returns true iff the cell at the given location is alive.
+     * @param x
+     * @param y
+     * @return true if cell is alive
+     */
     public boolean isAlive(int x, int y) {
         return world.contains(new Cell(x,y));
     }
 
+    // Helper class to store cell information
     private class Cell {
         int x, y;
 
