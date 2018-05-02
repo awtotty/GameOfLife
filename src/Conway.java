@@ -21,7 +21,7 @@ public class Conway {
             for (int y = 0; y < size; y++) {
                 Cell c = new Cell(x, y);
                 // randomly decide if the given cell is alive
-                if ( Math.random() > 0.9 ) { // chance of living = 90%
+                if ( Math.random() > 0.9 ) { // chance of living = 10%
                     addCell(c);
                 }
             }
